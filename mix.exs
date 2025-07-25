@@ -1,7 +1,7 @@
 defmodule ExFTMS.MixProject do
   use Mix.Project
 
-  @version "0.1.0"
+  @version "0.1.1"
   @description "Helps you decode and encode Bluetooth FTMS packets in Elixir"
   @github_url "https://github.com/schwarz/ex_ftms"
 
@@ -27,7 +27,7 @@ defmodule ExFTMS.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.38.2"},
+      {:ex_doc, "~> 0.38.2", only: :dev, runtime: false},
       {:stream_data, "~> 1.2", only: :test},
       {:styler, "~> 1.4", only: [:dev, :test], runtime: false}
     ]
