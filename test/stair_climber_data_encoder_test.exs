@@ -20,4 +20,12 @@ defmodule StairClimberDataEncoderTest do
 
     assert "FE01" == Base.encode16(Encoder.build_flags(build_order))
   end
+
+  test "ensure missing MET is encoded correctly" do
+    assert "00020D000100" ==
+             %ExFTMS.StairClimberData{floors: 13, remaining_time: 1}
+             |> Encoder.encode()
+             |> List.first()
+             |> Base.encode16()
+  end
 end

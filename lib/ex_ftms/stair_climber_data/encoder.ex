@@ -63,7 +63,7 @@ defmodule ExFTMS.StairClimberData.Encoder do
         | total_energy: replace_not_available(data.total_energy, 0xFFFF),
           energy_per_hour: replace_not_available(data.energy_per_hour, 0xFFFF),
           energy_per_minute: replace_not_available(data.energy_per_minute, 0xFF),
-          met: floor(Map.get(data, :met, 0) * 10)
+          met: scale_met(data.met)
       }
 
       Enum.reduce(keys, build_flags(keys), fn
@@ -84,6 +84,13 @@ defmodule ExFTMS.StairClimberData.Encoder do
       :data_not_available -> new_value
       nil -> new_value
       v -> v
+    end
+  end
+
+  defp scale_met(value) do
+    case value do
+      nil -> nil
+      v -> floor(v * 10)
     end
   end
 
